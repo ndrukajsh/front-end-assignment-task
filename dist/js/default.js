@@ -26,6 +26,10 @@ document.addEventListener("click", function(e){
 	if(target){
 		e.preventDefault();
 
+		if (document.getElementById("message")) {
+			document.getElementById("message").remove();
+		}
+
 		let formData = [];
 
 		let params = {};
@@ -34,19 +38,50 @@ document.addEventListener("click", function(e){
 
 			if (form.elements[i].type !== 'submit') {
 
+				let fieldName = form.elements[i].name;
+				let fieldValue = form.elements[i].value;
+
 				if (form.elements[i].type === 'radio' && !form.elements[i].checked){
 					continue;
 				}
 
-				let fieldName = form.elements[i].name;
-				let fieldValue = form.elements[i].value;
+				if (form.elements[i].type === 'radio' && fieldValue.length === 0) {
+					error = true;
+					errorMessage = 'Please check one of the options!';
+					break;
+				}
 
+				
 				if (form.elements[i].required === true) {
 					if (fieldValue === null || fieldValue === '') {
 						error = true;
 						errorMessage = 'Please fill required fields!';
 						break;
 					}
+				}
+
+				if (form.elements[i].type === 'tel'){
+					let regex = `^${form.elements[i].pattern}$`;
+
+					var re = new RegExp(regex);
+
+					if (!re.test(fieldValue)) {
+						error = true;
+						errorMessage = 'Wrong phone format!';
+						break;
+					}
+					
+				}
+
+				if (form.elements[i].type === 'email'){
+					const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+					if (!re.test(fieldValue)) {
+						error = true;
+						errorMessage = 'Wrong email format!';
+						break;
+					}
+					
 				}
 
 				params["name"] = fieldName
@@ -59,6 +94,7 @@ document.addEventListener("click", function(e){
 		}
 
 		const node = document.createElement("p");
+		node.id = 'message';
 		let textnode;
 
 		if (!error) {

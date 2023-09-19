@@ -49,6 +49,30 @@ document.addEventListener("click", function(e){
 					}
 				}
 
+				if (form.elements[i].type === 'tel'){
+					let regex = `^${form.elements[i].pattern}$`;
+
+					var re = new RegExp(regex);
+
+					if (!re.test(fieldValue)) {
+						error = true;
+						errorMessage = 'Wrong phone format!';
+						break;
+					}
+					
+				}
+
+				if (form.elements[i].type === 'email'){
+					const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+					if (!re.test(fieldValue)) {
+						error = true;
+						errorMessage = 'Wrong email format!';
+						break;
+					}
+					
+				}
+
 				params["name"] = fieldName
 				params["value"] = fieldValue
 

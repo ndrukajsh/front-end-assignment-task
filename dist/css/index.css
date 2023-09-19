@@ -3,16 +3,6 @@
 	margin: 100px auto;
 }
 
-/*#user-form {
-	text-align: center;
-}*/
-
-/*.element-wrapper {
-	display: flex;
-	justify-content: center;
-	gap: 20px;
-}*/
-
 .element-wrapper label{
 	font-size: 20px;
 }
@@ -24,7 +14,7 @@
 }
 
 .element-wrapper.radio-element > input{
-	margin-left: 20px;
+	margin-left: 10px;
 }
 
 

@@ -42,13 +42,19 @@ export default function buildLayout(elementData){
 			
 		}
 
+		let requiredData = '';
+
+		if (required) {
+			requiredData = 'required';
+		}
+
 		let finalElement = `<div class="element-wrapper text-element">
 					<label for="${id}">${label} ${requiredElement}</label>
 					<input 
 						type="${type}" 
 						name="${name}" 
 						id="${id}" 
-						required="${required}"`;
+						${requiredData}`;
 
 		if (pattern !== undefined) {
 			finalElement += `pattern="${pattern}"}/>

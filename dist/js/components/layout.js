@@ -2,8 +2,6 @@ export default function buildLayout(elementData){
 
 	const htmlLayoutElement = elementData.map((element) => {
 
-		console.log(element)
-
 		const type = element?.type;
 		const name = element?.name;
 		const id = element?.id;
@@ -30,7 +28,7 @@ export default function buildLayout(elementData){
 			});
 
 			if (optionsHtml !== undefined) {
-				return `<div class="element-wrapper">
+				return `<div class="element-wrapper radio-element">
 					<label for="${id}">${element?.legend}</label>
 					${optionsHtml}
 				</div>`
@@ -38,11 +36,11 @@ export default function buildLayout(elementData){
 			
 		}
 
-		let finalElement = `<div class="element-wrapper">
+		let finalElement = `<div class="element-wrapper text-element">
 					<label for="${id}">${label}</label>
 					<input 
 						type="${type}" 
-						name="${type}" 
+						name="${name}" 
 						id="${id}" 
 						required="${required}"`;
 
@@ -58,7 +56,7 @@ export default function buildLayout(elementData){
 						
 	});
 
-	return htmlLayoutElement.join('<br>') + '<button type="submit">Submit</button>';
+	return htmlLayoutElement.join('<br>') + '<button type="submit" id="submit">Submit</button>';
   
 }
 

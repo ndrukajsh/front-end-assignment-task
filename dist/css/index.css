@@ -1,0 +1,39 @@
+#main {
+	width: 50%;
+	margin: 100px auto;
+}
+
+/*#user-form {
+	text-align: center;
+}*/
+
+/*.element-wrapper {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}*/
+
+.element-wrapper label{
+	font-size: 20px;
+}
+
+.element-wrapper.text-element input{
+	float: right;
+    width: 70%;
+    padding: 5px;
+}
+
+.element-wrapper.radio-element > input{
+	margin-left: 20px;
+}
+
+
+#submit {
+	margin-top: 15px;
+    border: 1px solid green;
+    padding: 10px 15px;
+    background: green;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 6px;
+}

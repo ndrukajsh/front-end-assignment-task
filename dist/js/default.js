@@ -1,14 +1,16 @@
 // Your application goes here
 
 const API_URL = "https://mocki.io/v1/84954ef5-462f-462a-b692-6531e75c220d";
+const POST_API_URL = '';
 
 import FormData from './api/getFormData.js';
+import buildLayout from './components/layout.js';
+
+// get the data from API
 
 const formElements = await FormData(API_URL);
 
-console.log(formElements);
+// Render component based on the response
+const layout = buildLayout(formElements);
 
-// get the data from API
-	// create a class/file/function to handle that
-
-// set the json response as param to the function/class that will render component based on the response
+document.getElementById("user-form").innerHTML = layout;

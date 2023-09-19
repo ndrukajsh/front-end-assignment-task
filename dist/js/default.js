@@ -20,6 +20,9 @@ document.getElementById("user-form").innerHTML = layout;
 document.addEventListener("click", function(e){
 	const target = e.target.closest("#submit"); // Or any other selector.
 
+	let error = false;
+	let errorMessage = '';
+
 	if(target){
 		e.preventDefault();
 
@@ -38,6 +41,14 @@ document.addEventListener("click", function(e){
 				let fieldName = form.elements[i].name;
 				let fieldValue = form.elements[i].value;
 
+				if (form.elements[i].required === true) {
+					if (fieldValue === null || fieldValue === '') {
+						error = true;
+						errorMessage = 'Please fill required fields!';
+						break;
+					}
+				}
+
 				params["name"] = fieldName
 				params["value"] = fieldValue
 
@@ -47,25 +58,31 @@ document.addEventListener("click", function(e){
 			}
 		}
 
-		const postResponse = PostData(POST_API_URL, formData);
+		const node = document.createElement("p");
+		let textnode;
 
+		if (!error) {
+			const postResponse = PostData(POST_API_URL, formData);
 
-		postResponse.then((result) => {
+			postResponse.then((result) => {
 
-			const node = document.createElement("p");
-			let textnode;
-			
-			if (result === 'good') {
-				textnode = document.createTextNode("Form submitted successfully")
-				node.style.color = 'green';
-			} else {
-				node.style.color = 'red';
-				textnode = document.createTextNode("An error occurred!")
-			}
+				if (result === 'good') {
+					textnode = document.createTextNode("Form submitted successfully")
+					node.style.color = 'green';
+				} else {
+					node.style.color = 'red';
+					textnode = document.createTextNode("An error occurred!")
+				}
 
+				node.appendChild(textnode);
+				document.getElementById("main").appendChild(node);
+	        });
+		} else {
+			node.style.color = 'red';
+			textnode = document.createTextNode(errorMessage)
 			node.appendChild(textnode);
 			document.getElementById("main").appendChild(node);
-        });
+		}
 
 	}
 });

@@ -9,6 +9,12 @@ export default function buildLayout(elementData){
 		const label = element?.label;
 		const pattern = element?.pattern;
 
+		let requiredElement = '';
+
+		if (required === 1) {
+			requiredElement = '<span style="color: red;">*</span>'
+		}
+
 		if (type === 'radio') {
 			const options = element?.options;
 
@@ -29,7 +35,7 @@ export default function buildLayout(elementData){
 
 			if (optionsHtml !== undefined) {
 				return `<div class="element-wrapper radio-element">
-					<label for="${id}">${element?.legend}</label>
+					<label for="${id}">${element?.legend} ${requiredElement}</label>
 					${optionsHtml}
 				</div>`
 			}
@@ -37,7 +43,7 @@ export default function buildLayout(elementData){
 		}
 
 		let finalElement = `<div class="element-wrapper text-element">
-					<label for="${id}">${label}</label>
+					<label for="${id}">${label} ${requiredElement}</label>
 					<input 
 						type="${type}" 
 						name="${name}" 
